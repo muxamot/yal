@@ -12,7 +12,10 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(YAL_SRC
+  src/controller.cpp
   src/event_loop.cpp  
+  src/field.cpp
+  src/generator.cpp
   src/main.cpp
   src/window.cpp
 )

@@ -32,17 +32,14 @@ void Window::sdlInit()
         throw std::logic_error{"SDL initialization failed"};
     }
 
-    sdl_window_ = SDL_CreateWindow("Dumb doomish game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, desc_.width_,
-                                   desc_.height_, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    sdl_window_ = SDL_CreateWindow("Yet another Game of Life", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                   desc_.width_, desc_.height_, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
     if (!sdl_window_)
     {
         LOG(ERROR) << "Failed to create SDL window, SDL says: " << SDL_GetError();
         throw std::logic_error("Window initialization failed");
     }
-
-    sdl_cursor_ = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_NO);
-    SDL_SetCursor(sdl_cursor_);
 
     // Create a renderer with vsync enabled.
     renderer_ = SDL_CreateRenderer(sdl_window_, -1, SDL_RENDERER_PRESENTVSYNC);
