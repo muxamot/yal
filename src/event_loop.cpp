@@ -1,7 +1,7 @@
-#include <algorithm>
+#include "boost/range/algorithm.hpp"
 
 #include "event_loop.hpp"
-#include "logger.hpp"
+#include "log.hpp"
 
 #include "emscripten.h"
 
@@ -22,7 +22,7 @@ void EventLoopController::registerCallback(el_cb_t cb)
 
 void EventLoopController::doRunLoop()
 {
-    std::ranges::for_each(cbs_, [&](auto cb) {
+    boost::range::for_each(cbs_, [&](auto cb) {
         if (cb() != 0)
             LOG(ERROR) << "something wrong";
     });
