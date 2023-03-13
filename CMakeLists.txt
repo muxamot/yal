@@ -12,8 +12,9 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(YAL_SRC
+  src/event_loop.cpp  
   src/main.cpp
-  src/event_loop.cpp
+  src/window.cpp
 )
 
 add_executable(yal ${YAL_SRC})
