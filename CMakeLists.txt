@@ -9,9 +9,11 @@ endif()
 set (EMS_LINKER_FLAGS -sLLD_REPORT_UNDEFINED)
 set (EMS_COMMON_FLAGS -fexceptions -sUSE_SDL=2)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(YAL_SRC
   src/main.cpp
+  src/event_loop.cpp
 )
 
 add_executable(yal ${YAL_SRC})

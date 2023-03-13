@@ -1,0 +1,6 @@
+[
+    {
+        "name": "Emscripten Toolchain",
+        "toolchainFile": "${workspaceFolder}/../emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    }
+]
