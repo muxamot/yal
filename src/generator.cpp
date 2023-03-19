@@ -28,9 +28,18 @@ bool Generator::get(uint32_t x, uint32_t y)
     return field_[x][y];
 }
 
+Generator::updated_cells_list_t& Generator::updatedList()
+{
+    return upd_list_;
+}
+
 void Generator::generate()
 {
-    // generate
+}
+
+void Generator::clear()
+{
+    upd_list_.clear();
 }
 
 } // namespace yal

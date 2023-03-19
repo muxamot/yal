@@ -16,6 +16,7 @@ int main(int argc, char** argv)
     auto field = std::make_shared<Field>(generator);
     auto controller = std::make_shared<Controller>(std::move(generator));
 
+    draw_publisher.registerSubsciber(controller);
     draw_publisher.registerSubsciber(std::move(field));
     input_publisher.registerSubsciber(std::move(controller));
 

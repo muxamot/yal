@@ -95,13 +95,7 @@ bool Window::eventPolling()
             break;
         // keypress processing
         case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_ESCAPE:
-                return false;
-            default:
-                input_publisher_.publish(events::onKeyDown{event.key.keysym.sym});
-            }
+            input_publisher_.publish(events::onKeyDown{event.key.keysym.sym});
             break;
         case SDL_KEYUP:
             input_publisher_.publish(events::onKeyUp{event.key.keysym.sym});
