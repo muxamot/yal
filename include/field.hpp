@@ -16,6 +16,9 @@ private:
     sptr<Generator> generator_;
 
     void makeStaticBackground() noexcept;
+    void fillCell(uint32_t, uint32_t, RGBA) noexcept;
+    void redrawAll() noexcept;
+    void redraw() noexcept;
 
 public:
     Field(sptr<Generator>);

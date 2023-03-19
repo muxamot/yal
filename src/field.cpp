@@ -20,13 +20,42 @@ void Field::makeStaticBackground() noexcept
         canvas_->pixel(canvas_->width() - 1, y) = COLOR_BLACK;
 }
 
+void Field::fillCell(uint32_t cpx, uint32_t cpy, RGBA color) noexcept
+{
+    cpx *= CELL_SIZE;
+    cpy *= CELL_SIZE;
+
+    for (auto x = cpx + 2; x < (cpx + CELL_SIZE - 1); x++)
+        for (auto y = cpy + 2; y < (cpy + CELL_SIZE - 1); y++)
+            canvas_->pixel(x, y) = color;
+}
+
+void Field::redrawAll() noexcept
+{
+    if (!canvas_)
+        return;
+
+    makeStaticBackground();
+
+    for (uint32_t x = 0; x < CELLS_X; x++)
+        for (uint32_t y = 0; y < CELLS_Y; y++)
+            fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
+}
+
+void Field::redraw() noexcept
+{
+    for (uint32_t x = 0; x < CELLS_X; x++)
+        for (uint32_t y = 0; y < CELLS_Y; y++)
+            fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
+}
+
 void Field::onEvent(const event_t& event) noexcept
 {
     // clang-format off
     std::visit(events::overloaded{
-        [&](const events::onRedraw& event) { makeStaticBackground(); },
-        [&](const events::onResize& event) { window_ = event.descriptor_; },
-        [&](const events::onCanvasSet& event) { canvas_ = std::move(event.canvas_); }
+        [&](const events::onRedraw& event) { redraw(); },
+        [&](const events::onResize& event) { window_ = event.descriptor_; redrawAll();  },
+        [&](const events::onCanvasSet& event) { canvas_ = std::move(event.canvas_); redrawAll(); }
     }, event);
     // clang-format on
 }

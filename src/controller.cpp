@@ -1,4 +1,5 @@
 #include "controller.hpp"
+#include "log.hpp"
 
 namespace yal
 {
@@ -8,6 +9,7 @@ Controller::Controller(sptr<Generator> generator)
 
 void Controller::handleCellInput(uint32_t x, uint32_t y)
 {
+    LOG(INFO) << "x: " << x << ", y: " << y;
     generator_->switchState(x / CELL_SIZE, y / CELL_SIZE);
 }
 

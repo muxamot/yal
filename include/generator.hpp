@@ -10,7 +10,7 @@ namespace yal
 class Generator
 {
 private:
-    using field_state_t = std::array<std::array<bool, CELLS_X>, CELLS_Y>;
+    using field_state_t = std::array<std::array<bool, CELLS_Y>, CELLS_X>;
 
     field_state_t field_;
 

@@ -8,7 +8,7 @@
 namespace yal
 {
 
-class Controller : events::WindowInputEventSubscriber
+class Controller : public events::WindowInputEventSubscriber
 {
 private:
     enum class GameState
@@ -20,7 +20,7 @@ private:
     GameState state_;
     sptr<Generator> generator_;
 
-    void handleCellInput(uint32_t x, uint32_t y);
+    void handleCellInput(uint32_t, uint32_t);
 
 public:
     Controller(sptr<Generator>);
