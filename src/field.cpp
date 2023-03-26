@@ -44,8 +44,7 @@ void Field::redrawAll() noexcept
 
 void Field::redraw() noexcept
 {
-    const auto& updates = generator_->getUpdatedList();
-    for (const auto& [x, y] : updates)
+    for (const auto& [x, y] : generator_->getUpdatedList())
         fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
 
     generator_->clearUpdates();

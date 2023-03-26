@@ -18,6 +18,7 @@ private:
         GENERATE
     };
 
+    uint32_t gen_div_cnt_;
     GameState state_;
     sptr<Generator> generator_;
 

@@ -15,6 +15,7 @@ void Controller::handleCellInput(uint32_t x, uint32_t y)
     generator_->switchState(x / CELL_SIZE, y / CELL_SIZE);
 }
 
+// messy
 void Controller::commandInput(SDL_Keycode key)
 {
     if (key != SDLK_ESCAPE && key != SDLK_RETURN && key != SDLK_DELETE)
@@ -41,14 +42,25 @@ void Controller::commandInput(SDL_Keycode key)
     if (key == SDLK_ESCAPE || state_ == GameState::GENERATE)
         return;
 
-    state_ = GameState::GENERATE;
     LOG(INFO) << "Game started";
+    state_ = GameState::GENERATE;
+    generator_->makeLookupList();
 }
 
 void Controller::update() noexcept
 {
     if (state_ == GameState::GENERATE) [[likely]]
-        generator_->generate();
+    {
+        if (gen_div_cnt_ == 30)
+        {
+            generator_->generate();
+            gen_div_cnt_ = 0;
+        }
+        else
+        {
+            gen_div_cnt_++;
+        }
+    }
 }
 
 void Controller::onEvent(const events::WindowInputEventSubscriber::event_t& event) noexcept
