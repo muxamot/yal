@@ -51,7 +51,7 @@ void Controller::update() noexcept
 {
     if (state_ == GameState::GENERATE) [[likely]]
     {
-        if (gen_div_cnt_ == 30)
+        if (gen_div_cnt_ == 10)
         {
             generator_->generate();
             gen_div_cnt_ = 0;
