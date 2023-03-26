@@ -14,17 +14,26 @@ private:
     using field_state_t = std::array<std::array<bool, CELLS_Y>, CELLS_X>;
     using updated_cells_list_t = std::list<std::pair<uint32_t, uint32_t>>;
 
+    enum UpdateMode
+    {
+        PUBLIC,
+        SILENT
+    };
+
     updated_cells_list_t upd_list_;
     field_state_t field_;
+
+    void blankField(UpdateMode);
 
 public:
     Generator();
 
-    void switchState(uint32_t x, uint32_t y);
-    updated_cells_list_t& updatedList();
+    void switchState(uint32_t, uint32_t);
+    updated_cells_list_t& getUpdatedList();
     bool get(uint32_t x, uint32_t y);
     void generate();
-    void clear();
+    void clearUpdates();
+    void reset();
 };
 
 } // namespace yal

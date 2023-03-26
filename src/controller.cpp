@@ -12,15 +12,22 @@ void Controller::handleCellInput(uint32_t x, uint32_t y)
     if (state_ != GameState::FIELD_CONFIGURE)
         return;
 
-    LOG(INFO) << "x: " << x << ", y: " << y;
     generator_->switchState(x / CELL_SIZE, y / CELL_SIZE);
 }
 
 void Controller::commandInput(SDL_Keycode key)
 {
-    if (key != SDLK_ESCAPE && key != SDLK_RETURN)
+    if (key != SDLK_ESCAPE && key != SDLK_RETURN && key != SDLK_DELETE)
     {
         LOG(INFO) << "No action for this button, try ENTER or ESCAPE";
+        return;
+    }
+
+    if (key == SDLK_DELETE)
+    {
+        LOG(INFO) << "Field cleanup" << ((state_ == GameState::GENERATE) ? " game stopped" : "");
+        state_ = GameState::FIELD_CONFIGURE;
+        generator_->reset();
         return;
     }
 
@@ -31,7 +38,7 @@ void Controller::commandInput(SDL_Keycode key)
         return;
     }
 
-    if (state_ == GameState::GENERATE)
+    if (key == SDLK_ESCAPE || state_ == GameState::GENERATE)
         return;
 
     state_ = GameState::GENERATE;

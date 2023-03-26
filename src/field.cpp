@@ -44,9 +44,11 @@ void Field::redrawAll() noexcept
 
 void Field::redraw() noexcept
 {
-    for (uint32_t x = 0; x < CELLS_X; x++)
-        for (uint32_t y = 0; y < CELLS_Y; y++)
-            fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
+    const auto& updates = generator_->getUpdatedList();
+    for (const auto& [x, y] : updates)
+        fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
+
+    generator_->clearUpdates();
 }
 
 void Field::onEvent(const event_t& event) noexcept
