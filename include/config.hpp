@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "rgba.hpp"
+
 namespace yal
 {
 
@@ -14,5 +16,8 @@ constexpr uint32_t CELLS_Y = WIN_HEIGHT / CELL_SIZE;
 static_assert(WIN_WIDTH % CELL_SIZE == 0);
 static_assert(WIN_HEIGHT % CELL_SIZE == 0);
 static_assert(CELL_SIZE > 3);
+
+#define BG_COLOR COLOR_GRAY
+#define FG_COLOR COLOR_ORANGE
 
 }

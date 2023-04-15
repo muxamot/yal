@@ -11,13 +11,13 @@ void Field::makeStaticBackground() noexcept
 {
     for (uint32_t x = 0; x < canvas_->width(); x++)
         for (uint32_t y = 0; y < canvas_->height(); y++)
-            canvas_->pixel(x, y) = (x % CELL_SIZE == 0 || y % CELL_SIZE == 0) ? COLOR_BLACK : COLOR_WHITE;
+            canvas_->pixel(x, y) = (x % CELL_SIZE == 0 || y % CELL_SIZE == 0) ? FG_COLOR : BG_COLOR;
 
     for (uint32_t x = 0; x < canvas_->width(); x++)
-        canvas_->pixel(x, canvas_->height() - 1) = COLOR_BLACK;
+        canvas_->pixel(x, canvas_->height() - 1) = FG_COLOR;
 
     for (uint32_t y = 0; y < canvas_->height(); y++)
-        canvas_->pixel(canvas_->width() - 1, y) = COLOR_BLACK;
+        canvas_->pixel(canvas_->width() - 1, y) = FG_COLOR;
 }
 
 void Field::fillCell(uint32_t cpx, uint32_t cpy, RGBA color) noexcept
@@ -39,13 +39,13 @@ void Field::redrawAll() noexcept
 
     for (uint32_t x = 0; x < CELLS_X; x++)
         for (uint32_t y = 0; y < CELLS_Y; y++)
-            fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
+            fillCell(x, y, generator_->get(x, y) ? FG_COLOR : BG_COLOR);
 }
 
 void Field::redraw() noexcept
 {
     for (const auto& [x, y] : generator_->getUpdatedList())
-        fillCell(x, y, generator_->get(x, y) ? COLOR_BLACK : COLOR_WHITE);
+        fillCell(x, y, generator_->get(x, y) ? FG_COLOR : BG_COLOR);
 
     generator_->clearUpdates();
 }

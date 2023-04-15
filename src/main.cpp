@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     input_publisher.registerSubsciber(std::move(controller));
 
     auto window = std::make_shared<Window>(WindowDescriptor{WIN_WIDTH, WIN_HEIGHT}, draw_publisher, input_publisher);
-    auto evl_controller = std::make_shared<EventLoopController>();
+    auto evl_controller = std::make_unique<EventLoopController>();
 
     evl_controller->registerCallback([win = std::move(window)]() -> int { return win->display(); });
 

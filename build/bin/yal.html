@@ -16,7 +16,18 @@
             display: block;
         }
 
+        body {
+            background-color: #303030;
+        }
+
+        div.labels {
+            color: #FF8C00;
+        }
+
         textarea.emscripten {
+            border: 0px solid black;
+            background-color: #303030;
+            color: #FF8C00;
             font-family: monospace;
             width: 80%;
         }
@@ -32,7 +43,7 @@
         /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
         canvas.emscripten {
             border: 0px none;
-            background-color: black;
+            background-color: #303030;
         }
 
         .spinner {
@@ -94,12 +105,17 @@
 </head>
 
 <body>
-    <br><br>
+    <div class="labels" align="center">
+        <h2>Yet another game of life...</h2>
+        <i>Use a mouse to set or delete cells, press ENTER to start the game, press ESC to pause, press DEL to
+            reset</i><br><br>
+    </div>
 
     <figure style="overflow:visible;" id="spinner">
         <div class="spinner"></div>
-        <center style="margin-top:0.5em"><strong>emscripten</strong></center>
+        <center style="margin-top:0.5em; color: #FF8C00;"><strong>Loading...</strong></center>
     </figure>
+
     <div class="emscripten" id="status">Downloading...</div>
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
@@ -107,20 +123,9 @@
     <div class="emscripten_border">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
     </div>
-    <!--   <hr />
-    
-    <div class="emscripten">
-        <input type="checkbox" id="resize">Resize canvas
-        <input type="checkbox" id="pointerLock" checked>Lock/hide mouse pointer
-        &nbsp;&nbsp;&nbsp;
-        <input type="button" value="Fullscreen"
-            onclick="Module.requestFullscreen(document.getElementById('pointerLock').checked, 
-                                                                                document.getElementById('resize').checked)">
-    </div>
--->
     <!-- <hr /> -->
     <br>
-    <textarea class="emscripten" id="output" rows="6"></textarea>
+    <textarea class="emscripten" id="output" rows="2"></textarea>
     <!-- <hr> -->
     <script type='text/javascript'>
         var statusElement = document.getElementById('status');
